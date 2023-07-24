@@ -76,6 +76,11 @@ app.post('/showUser', async(req,res)=>{
     }
 })
 
+app.get('/showUser', async(req,res)=>{
+    let doc = await userSignUpDetail.find({}); 
+        res.json(doc);
+})
+
 app.listen(port,()=>{
     console.log(`Server is running on port : ${port}`) ;
 })
