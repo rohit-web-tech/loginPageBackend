@@ -5,11 +5,11 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require("path");
 const dotenv = require('dotenv');
-dotenv.config({path:'config.env'});
+dotenv.config({});
 const port = 80;
 
 app.use(cors())
-app.use(bodyParser.json())
+app.use(bodyParser.json()) 
 connectDb().catch(err=>console.log(err)) ;
 
 async function connectDb(){ 
