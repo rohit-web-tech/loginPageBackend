@@ -6,20 +6,21 @@ const bodyParser = require('body-parser');
 const path = require("path");
 const dotenv = require('dotenv');
 dotenv.config({path:'config.env'});
-const port = process.env.port;
+const port = 80;
 
 app.use(cors())
 app.use(bodyParser.json())
 connectDb().catch(err=>console.log(err)) ;
 
-async function connectDb(){
+async function connectDb(){ 
     await mongoose.set("strictQuery", false);
-    await mongoose.connect(process.env.database, {
+    await mongoose.connect(process.env.database, { 
         useUnifiedTopology: true,
         useNewUrlParser: true
-    })
+    });
     console.log("db connected"); 
 }
+
 
 const signUpSchema = new mongoose.Schema({
     userName : String,
@@ -27,7 +28,6 @@ const signUpSchema = new mongoose.Schema({
     userNum : Number ,
     userPassword : String
 })
-
 const userSignUpDetail = mongoose.model('userSignUpDetail',signUpSchema);
 
 
