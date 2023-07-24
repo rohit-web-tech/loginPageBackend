@@ -3,14 +3,14 @@ const app = express() ;
 const cors = require('cors') ;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const port = 80;
+const port = process.env.port;
 
 app.use(cors())
 app.use(bodyParser.json())
 connectDb().catch(err=>console.log(err)) ;
 
 async function connectDb(){
-    await mongoose.connect('mongodb+srv://rohitdogra0127:5K2h7A0IA5H3oPOR@rohitwebtech.impxcjz.mongodb.net/login');
+    await mongoose.connect(process.env.database);
     console.log("db connected");
 }
 
