@@ -3,6 +3,9 @@ const app = express() ;
 const cors = require('cors') ;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require("path");
+const dotenv = require('dotenv');
+dotenv.config({path:'config.env'});
 const port = process.env.port;
 
 app.use(cors())
@@ -10,8 +13,12 @@ app.use(bodyParser.json())
 connectDb().catch(err=>console.log(err)) ;
 
 async function connectDb(){
-    await mongoose.connect(process.env.database);
-    console.log("db connected");
+    await mongoose.set("strictQuery", false);
+    await mongoose.connect(process.env.database, {
+        useUnifiedTopology: true,
+        useNewUrlParser: true
+    })
+    console.log("db connected"); 
 }
 
 const signUpSchema = new mongoose.Schema({
